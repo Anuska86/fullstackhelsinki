@@ -70,7 +70,7 @@ const App = () => {
   return (
     <div>
       <Header course={course} />
-      <Content parts={Part1} />
+      <Content/>
       
       
     </div>
