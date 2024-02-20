@@ -5,19 +5,27 @@ const Course = (props) => {
   console.log(props);
   return (
     <div>
-      <Header headerData={props.courseData.name} />
-      <Content contentData={props.courseData.parts} />
-      <Total totalExercises={props.courseData.parts} />
+      <ul>
+      {props.courseData.map((currentCourse) => (
+      <Header headerData={currentCourse.courseData.name} />
+      <Content contentData={currentCourse.courseData.parts} />
+      <Total totalExercises={currentCourse.courseData.parts} />
+      )
+      )
+      }
+      </ul>
     </div>
-  );
+
+  )
 };
 
 const Header = (props) => {
   console.log("Header:");
   console.log(props);
+
   return (
     <div>
-      <h1>Title: {props.headerData}</h1>
+      <h1>Title: {props.headerData.name}</h1>
     </div>
   );
 };
@@ -45,33 +53,55 @@ const Total = (props) => {
   return (
     <div>
       <h1>The total of exercises is: {total}</h1>
-      <p></p>
     </div>
   );
 };
 
 const App = () => {
-  const courseInfo = {
-    id: 1,
-    name: "Half Stack application development",
-    parts: [
-      {
-        name: "Fundamentals of React",
-        exercises: 10,
-        id: 1,
-      },
-      {
-        name: "Using props to pass data",
-        exercises: 7,
-        id: 2,
-      },
-      {
-        name: "State of a component",
-        exercises: 14,
-        id: 3,
-      },
-    ],
-  };
+  const courseInfo =  [
+    {
+      name: 'Half Stack application development',
+      id: 1,
+      parts: [
+        {
+          name: 'Fundamentals of React',
+          exercises: 10,
+          id: 1
+        },
+        {
+          name: 'Using props to pass data',
+          exercises: 7,
+          id: 2
+        },
+        {
+          name: 'State of a component',
+          exercises: 14,
+          id: 3
+        },
+        {
+          name: 'Redux',
+          exercises: 11,
+          id: 4
+        }
+      ]
+    }, 
+    {
+      name: 'Node.js',
+      id: 2,
+      parts: [
+        {
+          name: 'Routing',
+          exercises: 3,
+          id: 1
+        },
+        {
+          name: 'Middlewares',
+          exercises: 7,
+          id: 2
+        }
+      ]
+    }
+  ]
 
   return <Course courseData={courseInfo} />;
 };
