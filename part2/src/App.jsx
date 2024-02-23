@@ -2,54 +2,51 @@
 /*data>>courseData>>response*/
 
 const Course = (props) => {
-  console.log(props);
+  console.log("Course:");
   return (
     <div>
-      <ul>
-      {props.courseData.map((currentCourse) => (
-      <Header headerData={currentCourse.courseData.name} />
-      <Content contentData={currentCourse.courseData.parts} />
-      <Total totalExercises={currentCourse.courseData.parts} />
-      )
-      )
-      }
-      </ul>
+      {props.courseData?.map((object, i) => {
+        console.log(object);
+        return (
+          <div key={i}>
+            <Header headerData={object} />
+            <Content contentData={object.parts} />
+            <Total totalExercises={object.parts} />
+          </div>
+        );
+      })}
     </div>
-
-  )
+  );
 };
 
-const Header = (props) => {
+const Header = ({ headerData }) => {
   console.log("Header:");
-  console.log(props);
-
+  console.log(headerData);
   return (
     <div>
-      <h1>Title: {props.headerData.name}</h1>
+      <h1>Title: {headerData.name}</h1>
     </div>
   );
 };
 
-const Content = (props) => {
+const Content = ({ contentData }) => {
   console.log("Content:");
-  console.log(props);
+  console.log(contentData);
   return (
     <div>
-      <p>
-        {props.contentData[0].name} {props.contentData[0].exercises}
-      </p>
-      <p>
-        {props.contentData[1].name} {props.contentData[1].exercises}
-      </p>
-      <p>
-        {props.contentData[2].name} {props.contentData[2].exercises}
-      </p>
+      {contentData?.map((object, i) => {
+        return (
+          <p key={i}>
+            {object.name} {object.exercises}
+          </p>
+        );
+      })}
     </div>
   );
 };
 
-const Total = (props) => {
-  let total = props.totalExercises.reduce((x, y) => (x = x + y.exercises), 0);
+const Total = ({ totalExercises }) => {
+  let total = totalExercises.reduce((x, y) => (x = x + y.exercises), 0);
   return (
     <div>
       <h1>The total of exercises is: {total}</h1>
@@ -58,50 +55,50 @@ const Total = (props) => {
 };
 
 const App = () => {
-  const courseInfo =  [
+  const courseInfo = [
     {
-      name: 'Half Stack application development',
+      name: "Half Stack application development",
       id: 1,
       parts: [
         {
-          name: 'Fundamentals of React',
+          name: "Fundamentals of React",
           exercises: 10,
-          id: 1
+          id: 1,
         },
         {
-          name: 'Using props to pass data',
+          name: "Using props to pass data",
           exercises: 7,
-          id: 2
+          id: 2,
         },
         {
-          name: 'State of a component',
+          name: "State of a component",
           exercises: 14,
-          id: 3
+          id: 3,
         },
         {
-          name: 'Redux',
+          name: "Redux",
           exercises: 11,
-          id: 4
-        }
-      ]
-    }, 
+          id: 4,
+        },
+      ],
+    },
     {
-      name: 'Node.js',
+      name: "Node.js",
       id: 2,
       parts: [
         {
-          name: 'Routing',
+          name: "Routing",
           exercises: 3,
-          id: 1
+          id: 1,
         },
         {
-          name: 'Middlewares',
+          name: "Middlewares",
           exercises: 7,
-          id: 2
-        }
-      ]
-    }
-  ]
+          id: 2,
+        },
+      ],
+    },
+  ];
 
   return <Course courseData={courseInfo} />;
 };
