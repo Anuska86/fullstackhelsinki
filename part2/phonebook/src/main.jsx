@@ -7,32 +7,32 @@ import App from './App'
 const persons = [
   {
     id: 1,
-    content: 'Courtney Cox',
+    name: 'Courteney Cox',
     
   },
   {
     id: 2,
-    content: 'Jennifer Aniston',
+    name: 'Jennifer Aniston',
     
   },
   {
     id: 3,
-    content: 'Lisa Kudrow',
+    name: 'Lisa Kudrow',
     
   },
   {
     id: 4,
-    content: 'Matthew Perry',
+    name: 'Matthew Perry',
     
   },
   {
     id: 5,
-    content: 'David Schwimmer',
+    name: 'David Schwimmer',
     
   },
   {
     id: 6,
-    content: 'Matt LeBlanc',
+    name: 'Matt LeBlanc',
     
   }
 ]

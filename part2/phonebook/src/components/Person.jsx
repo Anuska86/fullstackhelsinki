@@ -1,5 +1,5 @@
 const Person = ({ person }) => {
-    return <li>{person.content}</li>;
+    return <li>{person.name}</li>;
   };
 
   export default Person

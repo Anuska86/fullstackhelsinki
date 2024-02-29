@@ -7,13 +7,18 @@ const App = (props) => {
 
   const addPerson = (event) => {
     event.preventDefault();
-    const personObject = {
-      content: newName,
-      id: persons.length + 1,
-    };
-
-    setPersons(persons.concat(personObject));
-    setNewName("");
+    let valueAlreadyExist =persons.find(x=>x.name==newName)
+    if(valueAlreadyExist){
+      alert('User already exist!!');
+      return;
+    }else{
+      const personObject = {
+        name: newName,
+        id: persons.length + 1,
+      };
+      setPersons(persons.concat(personObject));
+      setNewName("");
+    }
   };
 
   const handleNameChange = (event) => {
