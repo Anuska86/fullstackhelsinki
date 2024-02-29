@@ -9,7 +9,7 @@ const App = (props) => {
     event.preventDefault();
     let valueAlreadyExist =persons.find(x=>x.name==newName)
     if(valueAlreadyExist){
-      alert('User already exist!!');
+      alert(`${newName} already exists!`);
       return;
     }else{
       const personObject = {
