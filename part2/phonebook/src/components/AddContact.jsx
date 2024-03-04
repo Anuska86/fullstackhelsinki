@@ -14,11 +14,12 @@ const AddContact = (props) => {
     setNewPhone(event.target.value);
   };
 
-
   const addPerson = (event) => {
     event.preventDefault();
     let valueAlreadyExists = props.persons.find((x) => x.name == newName);
-    let numberAlreadyExists = props.persons.find((x) => x.phoneNumber == newPhone);
+    let numberAlreadyExists = props.persons.find(
+      (x) => x.phoneNumber == newPhone
+    );
     if (valueAlreadyExists) {
       alert(`${newName} already exists!`);
       return;
@@ -30,7 +31,7 @@ const AddContact = (props) => {
         phoneNumber: newPhone,
         id: props.persons.length + 1,
       };
-      props.setPersons([...props.persons,personObject]);
+      props.setPersons([...props.persons, personObject]);
       setNewName("");
     }
   };

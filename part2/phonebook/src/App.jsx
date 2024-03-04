@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Person from "./components/Person";
 import AddContact from "./components/AddContact";
+import FindPerson from "./components/FindPerson";
 
 const App = () => {
   // eslint-disable-next-line react/prop-types
@@ -13,48 +14,15 @@ const App = () => {
     { id: 6, name: "Matt LeBlanc", phoneNumber: "212-4653336" },
   ]);
 
-
-  const [findName, setFindName] = useState();
-  const [contactExistAlert, setcontactExistAlert] = useState();
-
-
-  const findPerson = (event) => {
-    event.preventDefault();
-    let notExists = true; 
-    for(let i=0; i< persons.length;i++){
-      if(persons[i].name==findName){
-        setcontactExistAlert(JSON.stringify({ name: persons[i].name, phone: persons[i].phoneNumber }));
-        notExists = false;
-      }
-    }
-    if (notExists) {
-      setcontactExistAlert(`${findName} is not on the phonebook`);
-    }
-
-  };
-
-  const handleFindNameChange = (event) => {
-    setFindName(event.target.value);
-  };
-
   return (
     <div>
       <h2>Phonebook:</h2>
- 
-      <form onSubmit={findPerson}>
-        <div>
-          Find a contact:{" "}
-          <input value={findName} onChange={handleFindNameChange} />
-        </div>
-        <div>
-          <button type="submit">Find contact</button>
-          {contactExistAlert}
-        </div>
-      </form>
+
+      <FindPerson persons={persons} />
 
       <h2>Add a new contact:</h2>
 
-      <AddContact persons={persons} setPersons={setPersons}/>
+      <AddContact persons={persons} setPersons={setPersons} />
 
       <h2>Numbers</h2>
       <ul>
