@@ -2,18 +2,18 @@ import { useState, useEffect } from "react";
 import Person from "./components/Person";
 import AddContact from "./components/AddContact";
 import FindPerson from "./components/FindPerson";
-import axios from "axios";
+import personService from "./services/personService";
 
 const App = () => {
   // eslint-disable-next-line react/prop-types
   const [persons, setPersons] = useState([]);
 
   useEffect(() => {
-    console.log("effect");
-    axios.get("http://localhost:3001/persons").then((response) => {
-      console.log("promise fulfilled");
-      setPersons(response.data);
-    });
+   personService
+   .getAll()
+   .then(response => {
+    setPersons(response.data)
+   })
   }, []);
 
   return (

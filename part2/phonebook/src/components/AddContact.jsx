@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import axios from "axios";
+import personService from "../services/personService";
 
 const AddContact = (props) => {
   const [newName, setNewName] = useState("");
@@ -32,13 +32,12 @@ const AddContact = (props) => {
         phoneNumber: newPhone,
         id: props.persons.length + 1,
       };
-      axios.post('http://localhost:3001/persons', personObject)
+      personService
+      .create(personObject)
       .then(response => {
         console.log(response)
       })
-      axios.get("http://localhost:3001/persons").then((response) => {
-        props.setPersons(response.data);
-      });
+      props.setPersons([...props.persons, personObject]);
     }
   };
 
