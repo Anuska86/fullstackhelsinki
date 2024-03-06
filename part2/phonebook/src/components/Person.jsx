@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
-const Person = ({ person }) => {
-  try {
+const Person = ({ person, deleteNote }) => {
+
     return (
       <li>
         {person.name}: {person.phoneNumber}
+        <button onClick={deleteNote}>Delete contact</button>
       </li>
-    );
-  } catch (err) {
-    console.log(err);
+    )
+  
   }
-};
+
 
 export default Person;
