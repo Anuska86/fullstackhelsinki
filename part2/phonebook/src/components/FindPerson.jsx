@@ -8,12 +8,12 @@ const FindPerson = (props) => {
   const findPerson = (event) => {
     event.preventDefault();
     let notExists = true;
-    for (let i = 0; i < props.persons.length; i++) {
-      if (props.persons[i].name == findName) {
+    for (let i = 0; i < props.personsList.length; i++) {
+      if (props.personsList[i].name == findName) {
         setcontactExistAlert(
           JSON.stringify({
-            name: props.persons[i].name,
-            phone: props.persons[i].phoneNumber,
+            name: props.personsList[i].name,
+            phone: props.personsList[i].phoneNumber,
           })
         );
         notExists = false;

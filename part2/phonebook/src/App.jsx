@@ -7,7 +7,7 @@ import personService from "./services/personService";
 
 const App = () => {
   // eslint-disable-next-line react/prop-types
-  const [persons, setPersons] = useState([]);
+  const [personsList, setPersons] = useState([]);
 
  
 
@@ -21,20 +21,20 @@ const App = () => {
     <div>
       <h2>Phonebook:</h2>
 
-      <FindPerson persons={persons} />
+      <FindPerson personsList={personsList} />
 
       <h2>Add a new contact:</h2>
 
-      <AddContact persons={persons} setPersons={setPersons} />
+      <AddContact personsList={personsList} setPersons={setPersons} />
 
       <h2>Numbers</h2>
       <ul>
-        {persons.map((person) => (
+        {personsList.map((person) => (
           <Person
             key={person.id}
             person={person}
             phoneNumber={person.phoneNumber}
-            persons={persons}
+            personsList={personsList}
             setPersons={setPersons}
           />
         ))}

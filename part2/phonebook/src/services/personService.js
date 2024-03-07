@@ -1,15 +1,15 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/persons'
+const baseUrl = 'http://localhost:3001/personsList'
 
-const deleteContactOf = (id,persons,setPersons) => {
+const deleteContactOf = (id,personsList,setPersons) => {
   if (window.confirm("This contact is about to be deleted")) {
-    const url = `http://localhost:3001/persons/${id}`;
-    const person = persons.find((p) => p.id === id);
+    const url = `http://localhost:3001/personsList/${id}`;
+    const person = personsList.find((p) => p.id === id);
     const deletePerson = { ...person };
 
     axios.delete(url, deletePerson).then((response) => {
       setPersons(
-        persons.map((person) => (person.id !== id ? person : response.data))
+        personsList.map((person) => (person.id !== id ? person : response.data))
       );
     });
   }else{

@@ -1,22 +1,26 @@
 {
-  "persons": [
+  "personsList": [
     {
       "id": "1",
       "name": "Matt Jennifer Aniston",
       "phoneNumber": "212-4643336"
-    },   {
+    },
+    {
       "id": "2",
       "name": "Courteney Cox",
       "phoneNumber": "212-4652336"
-    },   {
+    },
+    {
       "id": "3",
       "name": "Lisa Kudrow",
       "phoneNumber": "212-65453336"
-    },   {
+    },
+    {
       "id": "4",
       "name": "David Schwimmer",
       "phoneNumber": "212-46897336"
-    },   {
+    },
+    {
       "id": "5",
       "name": "Mathew Perry",
       "phoneNumber": "212-4649336"
@@ -26,6 +30,5 @@
       "name": "Matt LeBlanc",
       "phoneNumber": "212-4653336"
     }
-    
   ]
 }

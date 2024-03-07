@@ -17,8 +17,8 @@ const AddContact = (props) => {
 
   const addPerson = (event) => {
     event.preventDefault();
-    let valueAlreadyExists = props.persons.find((x) => x.name == newName);
-    let numberAlreadyExists = props.persons.find(
+    let valueAlreadyExists = props.personsList.find((x) => x.name == newName);
+    let numberAlreadyExists = props.personsList.find(
       (x) => x.phoneNumber == newPhone
     );
     if (valueAlreadyExists) {
@@ -30,14 +30,14 @@ const AddContact = (props) => {
       const personObject = {
         name: newName,
         phoneNumber: newPhone,
-        id: props.persons.length + 1,
+        id: props.personsList.length + 1,
       };
       personService
       .create(personObject)
       .then(response => {
         console.log(response)
       })
-      props.setPersons([...props.persons, personObject]);
+      props.setPersons([...props.personsList, personObject]);
     }
   };
 
