@@ -18,9 +18,7 @@ const AddContact = (props) => {
   const addPerson = (event) => {
     event.preventDefault();
     let valueAlreadyExists = props.personsList.find((x) => x.name == newName);
-    let numberAlreadyExists = props.personsList.find(
-      (x) => x.phoneNumber == newPhone
-    );
+    let numberAlreadyExists = props.personsList.find((x) => x.phoneNumber == newPhone);
     if (valueAlreadyExists || numberAlreadyExists) {
       if(numberAlreadyExists){
         alert(`${newPhone} already exists!`);
