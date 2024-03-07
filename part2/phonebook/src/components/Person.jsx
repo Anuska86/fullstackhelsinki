@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
-const Person = ({ person, deleteNote }) => {
-
+import personService from "../services/personService";
+const Person = ({ person,persons,setPersons }) => {
     return (
       <li>
         {person.name}: {person.phoneNumber}
-        <button onClick={deleteNote}>Delete contact</button>
+        <button onClick={() => personService.deleteContactOf(person.id,persons,setPersons)}> Delete contact </button>
       </li>
     )
   

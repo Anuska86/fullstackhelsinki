@@ -8,10 +8,12 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 
-Start: yarn run dev
+Launch API yarn run dev
 
 npx json-server --port 3001 --watch db.json
 
 Install axios npm install axios
 
 Install json-server  npm install json-server --save-dev
+
+Launch server npm run server

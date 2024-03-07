@@ -4,16 +4,17 @@ import AddContact from "./components/AddContact";
 import FindPerson from "./components/FindPerson";
 import personService from "./services/personService";
 
+
 const App = () => {
   // eslint-disable-next-line react/prop-types
   const [persons, setPersons] = useState([]);
 
+ 
+
   useEffect(() => {
-   personService
-   .getAll()
-   .then(response => {
-    setPersons(response.data)
-   })
+    personService.getAll().then((response) => {
+      setPersons(response.data);
+    });
   }, []);
 
   return (
@@ -33,6 +34,8 @@ const App = () => {
             key={person.id}
             person={person}
             phoneNumber={person.phoneNumber}
+            persons={persons}
+            setPersons={setPersons}
           />
         ))}
       </ul>
