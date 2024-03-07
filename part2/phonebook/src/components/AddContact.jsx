@@ -21,11 +21,14 @@ const AddContact = (props) => {
     let numberAlreadyExists = props.personsList.find(
       (x) => x.phoneNumber == newPhone
     );
-    if (valueAlreadyExists) {
-      alert(`${newName} already exists!`);
-      return;
-    } else if (numberAlreadyExists) {
-      alert(`${newPhone} already exists!`);
+    if (valueAlreadyExists || numberAlreadyExists) {
+      if(numberAlreadyExists){
+        alert(`${newPhone} already exists!`);
+        return
+      }else{
+        personService.changeNumberOf(valueAlreadyExists.id,props.personsList,props.setPersons,newPhone)
+        return;
+      }
     } else {
       const personObject = {
         name: newName,
