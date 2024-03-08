@@ -4,12 +4,9 @@ import AddContact from "./components/AddContact";
 import FindPerson from "./components/FindPerson";
 import personService from "./services/personService";
 
-
 const App = () => {
   // eslint-disable-next-line react/prop-types
   const [personsList, setPersons] = useState([]);
-
- 
 
   useEffect(() => {
     personService.getAll().then((response) => {

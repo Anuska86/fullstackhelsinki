@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import personService from "../services/personService";
+import Notification from "../components/Notification";
 
 const AddContact = (props) => {
   const [newName, setNewName] = useState("");
   const [newPhone, setNewPhone] = useState();
+  const [addedContactMessage, setAddedContactMessage] = useState();
 
   const handleNameChange = (event) => {
     console.log(event.target.value);
@@ -18,13 +20,20 @@ const AddContact = (props) => {
   const addPerson = (event) => {
     event.preventDefault();
     let valueAlreadyExists = props.personsList.find((x) => x.name == newName);
-    let numberAlreadyExists = props.personsList.find((x) => x.phoneNumber == newPhone);
+    let numberAlreadyExists = props.personsList.find(
+      (x) => x.phoneNumber == newPhone
+    );
     if (valueAlreadyExists || numberAlreadyExists) {
-      if(numberAlreadyExists){
+      if (numberAlreadyExists) {
         alert(`${newPhone} already exists!`);
-        return
-      }else{
-        personService.changeNumberOf(valueAlreadyExists.id,props.personsList,props.setPersons,newPhone)
+        return;
+      } else {
+        personService.changeNumberOf(
+          valueAlreadyExists.id,
+          props.personsList,
+          props.setPersons,
+          newPhone
+        );
         return;
       }
     } else {
@@ -33,12 +42,14 @@ const AddContact = (props) => {
         phoneNumber: newPhone,
         id: props.personsList.length + 1,
       };
-      personService
-      .create(personObject)
-      .then(response => {
-        console.log(response)
-      })
+      personService.create(personObject).then((response) => {
+        console.log(response);
+      });
       props.setPersons([...props.personsList, personObject]);
+      setAddedContactMessage(`Contact '${newName}' has been added`);
+      setTimeout(() => {
+        setAddedContactMessage("");
+      }, 3000);
     }
   };
 
@@ -54,6 +65,7 @@ const AddContact = (props) => {
         </div>
         <div>
           <button type="submit">Add person</button>
+          <Notification message={addedContactMessage} />
         </div>
       </form>
     </div>
