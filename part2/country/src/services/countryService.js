@@ -5,13 +5,13 @@ const baseURL = "http://localhost:3001/countryList";
 const deleteCountryOf = (name, countryList, setCountry) => {
   if (window.confirm("This country is about to be deleted")) {
     const url = `http://localhost:3001/countryList'${name}`;
-    const country = countryList.find((c) => c.name === name);
+    const country = countryList.find((c) => c.name.common === name);
     const deleteCountry = { ...country };
 
     axios.delete(url, deleteCountry).then((response) => {
       setCountry(
         countryList.map((country) =>
-          country.name !== name ? country : response.data
+          country.name.common !== name ? country : response.data
         )
       );
     });
