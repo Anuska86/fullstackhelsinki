@@ -6,12 +6,14 @@ import countryService from "./services/countryService";
 const App = () => {
   const [countryList, setCountry] = useState([]);
 
+  /*
   useEffect(() => {
     countryService.getAll().then((response) => {
+      console.log(response.data);
       setCountry(response.data);
     });
   }, []);
-
+*/
 
   return (
     <div>
