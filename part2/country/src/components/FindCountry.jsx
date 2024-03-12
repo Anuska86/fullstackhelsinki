@@ -1,7 +1,7 @@
 import { useState } from "react";
 import countryService from "../services/countryService";
 
-const FindCountry = (props) => {
+const FindCountry = () => {
   const [findCountryName, setFindCountryName] = useState();
   const [countryExistAlert, setCountryExistAlert] = useState();
   const [tooManyElementsAlert, setTooManyElementsAlert] = useState();
@@ -36,8 +36,14 @@ const FindCountry = (props) => {
       if(numberOfMatches.length>10){
         console.log(numberOfMatches)
         setTooManyElementsAlert('Too many elements');
+      } else if (numberOfMatches.length===1) {
+        let bd=[countriesList.common,countriesList.capital,countriesList.area,countriesList.flag];
+        let d=bd.toString()
+        console.log(d)
       } else if (numberOfMatches.length<=10){
-        setTooManyElementsAlert(numberOfMatches)
+        let c=numberOfMatches.toString()
+        console.log(c)
+        setTooManyElementsAlert(c);
       }
 
       exist = countriesList.find((c) => c.name.common === currentCountry);
