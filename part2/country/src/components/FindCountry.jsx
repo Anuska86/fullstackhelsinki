@@ -4,15 +4,19 @@ import countryService from "../services/countryService";
 const FindCountry = (props) => {
   const [findCountryName, setFindCountryName] = useState();
   const [countryExistAlert, setCountryExistAlert] = useState();
+  const [tooManyElementsAlert, setTooManyElementsAlert] = useState();
   const [countriesList, setCountries] = useState([]);
+  const [numberOfMatches, setNumberOfMatches] = useState([]);
 
   const regexFindLetters = (pattern, value) => {
-    var re = new RegExp('^'+pattern, 'g');
-    let result = value.match(re);
-    if(result!==null){
-        console.log(result);
-        console.log(value);
+    var letter = new RegExp("^" + pattern, "g");
+    let result = value.match(letter);
+    if (result !== null) {
+      console.log(result);
+      console.log(value);
+      return value;
     }
+    return null;
   };
 
   const findCountry = (event) => {
@@ -20,19 +24,27 @@ const FindCountry = (props) => {
     let exist;
     event.preventDefault();
     countryService.getAll().then((response) => {
+      setCountries([])
       setCountries((countriesList) => [...countriesList, ...response.data]);
       console.log(countriesList);
-      for(let i = 0;i< countriesList.length;i++){
-        regexFindLetters(currentCountry,countriesList[i].name.common);
+      for (let i = 0; i < countriesList.length; i++) {
+        let resultOfMatch = regexFindLetters(currentCountry, countriesList[i].name.common);
+        if(resultOfMatch!==null){
+            setNumberOfMatches((numberOfMatches) => [...numberOfMatches,resultOfMatch]);
+        }
       }
-      //exist = countriesList.find((c) => c.name.common === currentCountry);
-    });
+      if(numberOfMatches.length>10){
+        console.log(numberOfMatches)
+        setTooManyElementsAlert('Too many elements');
+      } else if (numberOfMatches.length<=10){
+        setTooManyElementsAlert(numberOfMatches)
+      }
 
-    if (!exist) {
-      setCountryExistAlert(`${currentCountry} is not on the database`);
-    } else {
-      setCountryExistAlert(`Already ${currentCountry} on the database`);
-    }
+      exist = countriesList.find((c) => c.name.common === currentCountry);
+      if (!exist) {
+        setCountryExistAlert(`${currentCountry} is not on the database`);
+      }
+    });
   };
 
   const handleFindCountryChange = (event) => {
@@ -49,6 +61,7 @@ const FindCountry = (props) => {
         <button type="submit">Find country</button>
         {countryExistAlert}
       </div>
+      {tooManyElementsAlert}
     </form>
   );
 };

@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+/* eslint-disable no-unused-vars */
+import { useState} from "react";
 import "./App.css";
 import FindCountry from "./components/FindCountry";
 import countryService from "./services/countryService";
