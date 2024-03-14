@@ -1,15 +1,36 @@
 /* eslint-disable no-unused-vars */
-import { useState} from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import FindCountry from "./components/FindCountry";
 import countryService from "./services/countryService";
 
 const App = () => {
+  const [countriesList, setCountries] = useState([]);
+  const [findCountryName, setFindCountryName] = useState();
+
+  useEffect(() => {
+    countryService.getAll().then((response) => {
+      console.log(response.data)
+      setCountries(response.data);
+    });
+  }, []);
+
+  const handleFindCountryChange = (event) => {
+    setFindCountryName(event.target.value);
+  };
 
   return (
     <div>
-      <h2>Find a country: </h2>
-      <FindCountry />
+      <div>
+        Find a country:{" "}
+        <input value={findCountryName} onChange={handleFindCountryChange} />
+      </div>
+      <div>
+        <FindCountry
+          findCountryName={findCountryName}
+          countriesList={countriesList}
+        />
+      </div>
     </div>
   );
 };
