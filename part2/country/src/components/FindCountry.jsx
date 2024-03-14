@@ -45,19 +45,26 @@ const FindCountry = ({ findCountryName, countriesList }) => {
       let selectedCountry = countriesList.find(
         (c) => c.name.common === findCountryName
       );
-      let bd = {
-        name: selectedCountry.name.common,
-        capital: selectedCountry.capital[0],
-        area: selectedCountry.area,
-        flag: selectedCountry.flags.png,
-      };
-      setCountryName(bd.name);
-      setCountryCapital(bd.capital);
-      setCountryArea(bd.area);
-      setFlag(bd.flag);
 
-      let d = bd.toString();
-      console.log(d);
+      try {
+        let bd = {
+          name: selectedCountry.name.common,
+          capital: selectedCountry.capital[0],
+          area: selectedCountry.area,
+          flag: selectedCountry.flags.png,
+        };
+
+        setCountryName(bd.name);
+        setCountryCapital(bd.capital);
+        setCountryArea(bd.area);
+        setFlag(bd.flag);
+
+        let d = bd.toString();
+        console.log(d);
+      } catch (e) {
+        console.log(e);
+        alert("Register not in database!");
+      }
     } else if (numberOfMatches.length <= 10) {
       let c = numberOfMatches.toString();
       console.log(c);
@@ -74,12 +81,16 @@ const FindCountry = ({ findCountryName, countriesList }) => {
       <button onClick={findCountry}>Find country</button>
       {countryExistAlert}
       <div>{tooManyElementsAlert}</div>
-      <div>
-        <li>{countryName}</li>
-        <li>{countryCapital}</li>
-        <li>{countryArea}</li>
-      </div>
-      <img src={flag} alt="" />
+      {countryName && (
+        <div>
+          <div>
+            <li>{countryName}</li>
+            <li>{countryCapital}</li>
+            <li>{countryArea}</li>
+          </div>
+          <img src={flag} alt="" />
+        </div>
+      )}
     </div>
   );
 };
