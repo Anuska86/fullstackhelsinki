@@ -1,5 +1,19 @@
 import { useState } from "react";
-import countryService from "../services/countryService";
+
+const CountriesDataInfo = (props) =>{
+  return (
+    <div>
+      {props.props?.map((obj, i) => {
+        return (
+          <p key={i}>
+            {obj.name.common} {obj.capital[0]}
+            {obj.area} {obj.flag}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
 
 const FindCountry = ({ findCountryName, countriesList }) => {
   //const [findCountryName, setFindCountryName] = useState();
@@ -9,8 +23,22 @@ const FindCountry = ({ findCountryName, countriesList }) => {
   const [countryCapital, setCountryCapital] = useState();
   const [countryArea, setCountryArea] = useState();
   const [flag, setFlag] = useState();
+  const [matchesData, setMatchesData] = useState([]);
   //const [countriesList, setCountries] = useState([]);
   const [numberOfMatches, setNumberOfMatches] = useState([]);
+
+  const CountriesData = () => {
+    console.log(numberOfMatches);
+    for(let i=0;i<numberOfMatches.length;i++){
+      setMatchesData((prev) => [
+        ...prev,
+        countriesList.find((c) => c.name.common === numberOfMatches[i])
+      ]);
+    }
+    console.log(matchesData)
+
+    return matchesData;
+  };
 
   const regexFindLetters = (pattern, value) => {
     var letter = new RegExp("^" + pattern, "g");
@@ -89,6 +117,13 @@ const FindCountry = ({ findCountryName, countriesList }) => {
             <li>{countryArea}</li>
           </div>
           <img src={flag} alt="" />
+        </div>
+      )}
+
+      {numberOfMatches.length <= 10 && numberOfMatches.length > 1 && (
+        <div>
+        <button onClick={CountriesData}>Show information</button>
+        <CountriesDataInfo props={matchesData}></CountriesDataInfo>
         </div>
       )}
     </div>
