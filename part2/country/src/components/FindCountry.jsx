@@ -28,6 +28,7 @@ const FindCountry = ({ findCountryName, countriesList }) => {
   const [numberOfMatches, setNumberOfMatches] = useState([]);
 
   const CountriesData = () => {
+    setMatchesData([])
     console.log(numberOfMatches);
     for(let i=0;i<numberOfMatches.length;i++){
       setMatchesData((prev) => [
