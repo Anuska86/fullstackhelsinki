@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import FindCountry from "./components/FindCountry";
 import countryService from "./services/countryService";
+import { API_KEY } from './config';
 
 const App = () => {
   const [countriesList, setCountries] = useState([]);
   const [findCountryName, setFindCountryName] = useState();
+  console.log(API_KEY);
 
   useEffect(() => {
     countryService.getAll().then((response) => {
