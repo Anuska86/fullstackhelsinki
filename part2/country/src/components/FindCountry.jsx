@@ -1,4 +1,5 @@
 import { useState } from "react";
+import weatherService from "../services/weatherService";
 
 const CountriesDataInfo = (props) =>{
   return (
@@ -81,7 +82,10 @@ const FindCountry = ({ findCountryName, countriesList }) => {
           capital: selectedCountry.capital[0],
           area: selectedCountry.area,
           flag: selectedCountry.flags.png,
+          latlng: selectedCountry.latlng
         };
+
+        weatherService.getWeather(bd.latlng)
 
         setCountryName(bd.name);
         setCountryCapital(bd.capital);
