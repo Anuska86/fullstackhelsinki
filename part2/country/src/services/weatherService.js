@@ -12,7 +12,6 @@ const getWeather = (latlng) => {
   return request.then((response) => {
     const weatherInfo = response.data;
     const iconURL = ``;
-    console.log(weatherInfo);
     const weatherWithIcon = { ...weatherInfo, iconURL: iconURL };
     return weatherWithIcon;
   });

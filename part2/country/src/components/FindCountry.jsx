@@ -1,7 +1,8 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 import { useState } from "react";
 import weatherService from "../services/weatherService";
 
-const CountriesDataInfo = (props) =>{
+const CountriesDataInfo = (props) => {
   return (
     <div>
       {props.props?.map((obj, i) => {
@@ -14,7 +15,7 @@ const CountriesDataInfo = (props) =>{
       })}
     </div>
   );
-}
+};
 
 const FindCountry = ({ findCountryName, countriesList }) => {
   //const [findCountryName, setFindCountryName] = useState();
@@ -27,17 +28,20 @@ const FindCountry = ({ findCountryName, countriesList }) => {
   const [matchesData, setMatchesData] = useState([]);
   //const [countriesList, setCountries] = useState([]);
   const [numberOfMatches, setNumberOfMatches] = useState([]);
+  const [countryTemperature, setCountryTemperature] = useState();
+  const [countryIcon, setCountryIcon] = useState();
+  const [countryWind, setCountryWind] = useState();
 
   const CountriesData = () => {
-    setMatchesData([])
+    setMatchesData([]);
     console.log(numberOfMatches);
-    for(let i=0;i<numberOfMatches.length;i++){
+    for (let i = 0; i < numberOfMatches.length; i++) {
       setMatchesData((prev) => [
         ...prev,
-        countriesList.find((c) => c.name.common === numberOfMatches[i])
+        countriesList.find((c) => c.name.common === numberOfMatches[i]),
       ]);
     }
-    console.log(matchesData)
+    console.log(matchesData);
 
     return matchesData;
   };
@@ -53,7 +57,7 @@ const FindCountry = ({ findCountryName, countriesList }) => {
     return null;
   };
 
-  const findCountry = () => {
+  const findCountry = async () => {
     setNumberOfMatches([]);
     let exist;
     for (let i = 0; i < countriesList.length; i++) {
@@ -82,16 +86,21 @@ const FindCountry = ({ findCountryName, countriesList }) => {
           capital: selectedCountry.capital[0],
           area: selectedCountry.area,
           flag: selectedCountry.flags.png,
-          latlng: selectedCountry.latlng
+          latlng: selectedCountry.latlng,
         };
 
-        let weatherInfo = weatherService.getWeather(bd.latlng);
-        console.log(weatherInfo)
+        let weatherInfo = await weatherService.getWeather(bd.latlng);
+        console.log(weatherInfo);
 
         setCountryName(bd.name);
         setCountryCapital(bd.capital);
         setCountryArea(bd.area);
         setFlag(bd.flag);
+
+
+        setCountryTemperature(weatherInfo.current.temp_c);
+        setCountryIcon('https:'+weatherInfo.current.condition.icon);
+        setCountryWind(weatherInfo.current.vis_km)
 
         let d = bd.toString();
         console.log(d);
@@ -118,18 +127,23 @@ const FindCountry = ({ findCountryName, countriesList }) => {
       {countryName && (
         <div>
           <div>
-            <li>{countryName}</li>
-            <li>{countryCapital}</li>
-            <li>{countryArea}</li>
+            <li>Country: {countryName}</li>
+            <li>Capital: {countryCapital}</li>
+            <li>Area: {countryArea}</li>
           </div>
           <img src={flag} alt="" />
+          <div>
+            <li>Temperature:{countryTemperature}°C</li>
+            <img src={countryIcon} alt="status of the weather"></img>
+            <li>{countryWind} Km/h</li>
+          </div>
         </div>
       )}
 
       {numberOfMatches.length <= 10 && numberOfMatches.length > 1 && (
         <div>
-        <button onClick={CountriesData}>Show information</button>
-        <CountriesDataInfo props={matchesData}></CountriesDataInfo>
+          <button onClick={CountriesData}>Show information</button>
+          <CountriesDataInfo props={matchesData}></CountriesDataInfo>
         </div>
       )}
     </div>
