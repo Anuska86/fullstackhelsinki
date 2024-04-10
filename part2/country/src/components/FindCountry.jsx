@@ -85,7 +85,8 @@ const FindCountry = ({ findCountryName, countriesList }) => {
           latlng: selectedCountry.latlng
         };
 
-        weatherService.getWeather(bd.latlng)
+        let weatherInfo = weatherService.getWeather(bd.latlng);
+        console.log(weatherInfo)
 
         setCountryName(bd.name);
         setCountryCapital(bd.capital);
