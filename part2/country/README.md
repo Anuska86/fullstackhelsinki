@@ -76,4 +76,6 @@ Install axios npm install axios
 
 Install json-server  npm install json-server --save-dev
 
+compile npm run build
+
 Launch server npm run server
